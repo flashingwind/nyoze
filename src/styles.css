@@ -7814,6 +7814,21 @@ body.is-resizing-pane {
   white-space: pre-wrap;
 }
 
+/* In vertical writing modes the monospace label fonts have no
+   Japanese glyphs, so characters such as "。" are left to the OS
+   font fallback and render small and misplaced instead of using the
+   vertical presentation forms. Name the app's own gothic stack as
+   the explicit fallback (before the generic monospace keyword, which
+   would otherwise swallow the fallback chain) so Japanese glyphs and
+   punctuation follow the same rendering spec as the text, while
+   half-width characters stay monospace. Horizontal mode is
+   unchanged. */
+.editor-panel[data-writing-mode="vertical-rl"] .html-block-atom,
+.editor-panel[data-writing-mode="vertical-lr"] .html-block-atom {
+  font-family: "SF Mono", Menlo, Consolas, var(--font-stack-gothic),
+    monospace;
+}
+
 /* ─────────────────────────────────────────────────────────────
    Nyoze 独自ブロック装飾 (custom block directive)
    `:::align-center` / `:::align-end` / `:::indent-N` / `:::style-<id>`
